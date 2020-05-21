@@ -150,17 +150,6 @@ input:focus {
   margin-right: 5px;
 }
 
-.right-container div:hover:after {
-  position: absolute;
-  content: attr(title);
-  display: inline-block;
-  left: 0px;
-  top: 0px;
-  padding: 5px;
-  background-color: black;
-  color: white;
-}
-
 footer {
   position: absolute;
   right: 10px;
