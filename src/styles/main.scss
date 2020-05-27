@@ -5,12 +5,13 @@ body{
     box-sizing: border-box;
     padding:0;
     margin:0;
-    display:flex;
-    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
+    background:black;
+    color:white;
 }
 .main-container{
+    margin:auto;
     width:70vw;
    transform: translateY(10%);
    display:grid;
@@ -109,9 +110,8 @@ footer a{
 
 }
 .loading-img{
-    $size: 70px;
-    width:$size;
-    height:$size;
+    width:70px;
+    height:70px;
     position:absolute;
     margin:auto;
     right:0;
@@ -136,5 +136,4 @@ footer a{
     }
 }
 
-@import 'weather';
-@import 'background';
+@import 'weather', 'background';
