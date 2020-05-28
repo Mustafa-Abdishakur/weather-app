@@ -47,7 +47,6 @@ export const loading = () => {
 export const weather = code => {
     const codeArr = [code.substring(0, 2), code[2]];
     let markup;
-    console.log(DOM.weather);
     switch (codeArr[0]) {
         case '01':
              markup = `

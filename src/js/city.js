@@ -18,10 +18,10 @@ export default class City {
             this.pressure = json.main.pressure;
             this.humidity = json.main.humidity;
             this.countryCode = json.sys.country;
-            console.log(json);
+            //console.log(json);
         } catch (error) {
             loading();
-            console.log(error);
+            //console.log(error);
             alert('Ops, something went wrong. Please try again.');
         }
 

@@ -2,7 +2,6 @@ import '../styles/main.scss';
 import City from './city.js';
 import {DOM, view, loading, weather} from './view.js';
 
-
 DOM.input.addEventListener('keydown', async (event) => {
     if (event.keyCode === 13) {
         //loading 
@@ -11,6 +10,8 @@ DOM.input.addEventListener('keydown', async (event) => {
         const inputCity = event.target.value;
         const city = new City(inputCity);
         await city.getInfo();
+
+
         //display results
         loading();
         weather(city.code);
@@ -30,7 +31,6 @@ DOM.input.addEventListener('keydown', async (event) => {
     view(city);
 
 });*/
-
 
 
 
