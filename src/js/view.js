@@ -1,5 +1,6 @@
 //view module
 import countryList from 'iso-3166-country-list';
+import { clouds } from './cloud constants';
 export const DOM = {
     input: document.querySelector('input'),
     city: document.querySelector('.city'),
@@ -12,21 +13,18 @@ export const DOM = {
     loading: document.querySelector('.loading-img'),
     main: document.querySelector('.main-container'),
     icon: document.querySelector('.icon'),
-    weather: document.querySelector('.weather-icon-container')
-    /*sunny: document.querySelector('.sunny'),
-    cloudy: document.querySelector('.cloudy'),
-    rainy: document.querySelector('.rainy'),
-    thunderStorm: document.querySelector('.thunder-storm'),
-    sunShower: document.querySelector('.sun-shower'),
-    snowy: document.querySelector('.flurries')
-*/
+    weather: document.querySelector('.weather-icon-container'),
+    cityInfo: document.querySelector('.city-info-container'),
+    secondaryContainer: document.querySelector('.secondary-container'),
+    forecastContainer: document.querySelector('.forecast-container'),
+    day1: document.querySelector('.temperature-1'),
+    day2: document.querySelector('.temperature-2'),
+    day3: document.querySelector('.temperature-3')
 }
 
 export const view = city => {
-    const countryArr = city.name.split('');
-    const firstLetter = countryArr[0].toUpperCase();
-    countryArr.splice(0, 1, firstLetter);
-    const cityName = countryArr.join('');
+
+    const cityName = capitalize(city);
     const country = countryList.name(city.countryCode);
     DOM.city.innerHTML = `${cityName}, ${country}`;
     DOM.location.innerHTML = `Latitude: ${city.latitude}° Longitude: ${city.longitude}°`;
@@ -38,7 +36,7 @@ export const view = city => {
 };
 
 export const loading = () => {
-    [document.querySelector('.city-info-container'), document.querySelector('.secondary-container')].forEach(el => {
+    [DOM.cityInfo, DOM.secondaryContainer, DOM.forecastContainer].forEach(el => {
         el.classList.toggle('disappear');
     });
     DOM.loading.classList.toggle('appear');
@@ -46,110 +44,101 @@ export const loading = () => {
 
 export const weather = code => {
     const codeArr = [code.substring(0, 2), code[2]];
-    let markup;
     switch (codeArr[0]) {
         case '01':
-             markup = `
-            <div class="icon sunny">
-                <div class="sun">
-                     <div class="rays"></div>
-                </div>
-            </div>
-            `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.sunnyMarkup);
             break;
         case '02':
-             markup = `
-            <div class="icon sunny">
-                <div class="sun">
-                     <div class="rays"></div>
-                </div>
-            </div>
-            `;
+
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.sunnyMarkup);
             break;
         case '03':
-             markup = `
-            <div class="icon cloudy">
-                <div class="cloud"></div>
-                    <div class="cloud"></div>
-            </div>
-            `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
             break;
         case '04':
-             markup = `
-            <div class="icon cloudy">
-                <div class="cloud"></div>
-                    <div class="cloud"></div>
-            </div>
-            `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
             break;
         case '09':
-             markup = `
-            <div class="icon rainy">
-                <div class="cloud"></div>
-                    <div class="rain"></div>
-            </div>
-            `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.rainyMarkup);
             break;
         case '10':
-             markup = `
-            <div class="icon sun-shower">
-                <div class="cloud"></div>
-                    <div class="sun">
-                         <div class="rays"></div>
-                     </div>
-                <div class="rain"></div>
-            </div>
-            `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.sunShowerMarkup);
             break;
         case '11':
-             markup = `
-            <div class="icon thunder-storm">
-                <div class="cloud"></div>
-                <div class="lightning">
-                    <div class="bolt"></div>
-                    <div class="bolt"></div>
-                </div>
-            </div>
-                `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.thunderStormMarkup);
             break;
         case '13':
-             markup = `
-                <div class="icon flurries">
-                    <div class="cloud"></div>
-                    <div class="snow">
-                        <div class="flake"></div>
-                        <div class="flake"></div>
-                    </div>
-                </div>
-                    `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.snowyMarkup);
             break;
         case '50':
-             markup = `
-             <div class="icon cloudy">
-                <div class="cloud"></div>
-                <div class="cloud"></div>
-             </div>
-                    `;
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
-            DOM.weather.insertAdjacentHTML('beforeend', markup);
+            DOM.weather.insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
             break;
     }
 }
+function capitalize(city) {
+    const countryArr = city.name.split('');
+    const firstLetter = countryArr[0].toUpperCase();
+    countryArr.splice(0, 1, firstLetter);
+    return countryArr.join('');
+}
+export const forecastView = forecast => {
+    DOM.day1.innerHTML = `${Math.round(forecast.day1.temp)}°C</br>${forecast.day1.description}`;
+    DOM.day2.innerHTML = `${Math.round(forecast.day2.temp)}°C</br>${forecast.day2.description}`;
+    DOM.day3.innerHTML = `${Math.round(forecast.day3.temp)}°C</br>${forecast.day3.description}`;
+}
 
+export const forecastClouds = codes => {
 
+    codes.forEach((cur, index) => {
+        const code = cur.substring(0, 2);
+        switch (code) {
+            case '01':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.sunnyMarkup);
+                break;
+            case '02':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.sunnyMarkup);
+                break;
+            case '03':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
+                break;
+            case '04':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
+                break;
+            case '09':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.rainyMarkup);
+                break;
+            case '10':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.sunShowerMarkup);
+                break;
+            case '11':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.thunderStormMarkup);
+                break;
+            case '13':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.snowyMarkup);
+                break;
+            case '50':
+                document.querySelector(`.forecast-${index + 1} .icon`).parentNode.removeChild(document.querySelector(`.forecast-${index + 1} .icon`));
+                document.querySelector(`.forecast-${index + 1} .weather-icon-container`).insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
+                break;
+        }
+
+    });
+
+};

@@ -13,7 +13,7 @@ body{
 .main-container{
     margin:auto;
     width:70vw;
-   transform: translateY(10%);
+   transform: translateY(5%);
    display:grid;
    grid-template-rows:repeat(2, 1fr);
    min-height:50vh;
@@ -21,7 +21,6 @@ body{
 
 .search-container{
     grid-column: 1/2;
-    margin-top:15px;
     display:flex;
     justify-content: center;
     text-align: center;
@@ -134,6 +133,35 @@ footer a{
     100%{
         transform: rotate(-360deg);
     }
+}
+.forecast-header{
+    text-align: center;
+    color:rgb(45, 212, 199); 
+    border-bottom:1px solid rgb(45, 212, 199);
+    width:50%;
+    margin:auto; 
+}
+.forecasts{
+    display:flex;
+    justify-content: center;
+  margin-top:-10px;
+  padding:0;
+}
+.forecast{
+    display:flex;
+    margin-right:7px;
+}
+.forecast p{
+    align-self: center;
+    color:rgb(45, 212, 199); 
+    position: relative;
+    right:18px;
+    top:10px;
+    font-size:15px;
+    font-weight:bold;
+}
+.forecast .weather-icon-container .icon{
+    width:10em;
 }
 
 @import 'weather', 'background';
