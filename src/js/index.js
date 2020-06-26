@@ -1,6 +1,7 @@
 /*TO DO LATER
 * add option to change from calling by city to calling by other methods (EX: zip code) (check documents).
 * add analog clock displaying the city time
+* add a front page and make the current page the second page after the first search.
 */
 import '../styles/main.scss';
 import City from './model/city';
@@ -28,7 +29,7 @@ DOM.input.addEventListener('keydown', async (event) => {
 })
 
 //when page is loaded
-window.addEventListener('load', async (event) =>{
+/*window.addEventListener('load', async (event) =>{
         loading();
     const city = new City("أبوظبي");
     await city.getInfo();
@@ -47,3 +48,4 @@ window.addEventListener('load', async (event) =>{
 
 
 
+*/
