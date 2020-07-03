@@ -4,6 +4,7 @@
     width: 12em;
     height: 10em;
     font-size: 1em; /* control icon size here */
+    background:none !important;
   }
   
   .cloud {
@@ -104,12 +105,11 @@
     width: 3.75em;
     height: 3.75em;
     margin: 0.375em 0 0 -2em;
-    background: black;
   }
   .rain{
     z-index:0;
     top:60%;
-    background:black;
+    background:none;
   }
   
   .rain:after {

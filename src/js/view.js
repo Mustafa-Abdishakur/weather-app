@@ -2,7 +2,8 @@
 import countryList from 'iso-3166-country-list';
 import { clouds } from './cloud constants';
 export const DOM = {
-    input: document.querySelector('input'),
+    input: document.querySelector('.search-input'),
+    background:document.querySelector('.background-container'),
     city: document.querySelector('.city'),
     location: document.querySelector('.location'),
     temperature: document.querySelector('.temperature'),
@@ -46,39 +47,47 @@ export const weather = code => {
     const codeArr = [code.substring(0, 2), code[2]];
     switch (codeArr[0]) {
         case '01':
+            DOM.background.classList.add('sunny');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.sunnyMarkup);
             break;
         case '02':
-
+            DOM.background.classList.add('sunny');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.sunnyMarkup);
             break;
         case '03':
+            DOM.background.classList.add('cloudy');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
             break;
         case '04':
+            DOM.background.classList.add('cloudy');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
             break;
         case '09':
+            DOM.background.classList.add('rainy');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.rainyMarkup);
             break;
         case '10':
+            DOM.background.classList.add('sunny');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.sunShowerMarkup);
             break;
         case '11':
+            DOM.background.classList.add('stormy');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.thunderStormMarkup);
             break;
         case '13':
+            DOM.background.classList.add('snowy');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.snowyMarkup);
             break;
         case '50':
+            DOM.background.classList.add('cloudy');
             document.querySelector('.icon').parentNode.removeChild(document.querySelector('.icon'));
             DOM.weather.insertAdjacentHTML('beforeend', clouds.cloudyMarkup);
             break;
