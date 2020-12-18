@@ -19,8 +19,8 @@ export default class City {
             this.humidity = json.main.humidity;
             this.countryCode = json.sys.country;
         } catch (error) {
-            loading();
             alert('Ops, something went wrong. Please try again.');
+            return;
         }
 
     }
